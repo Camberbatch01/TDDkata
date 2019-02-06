@@ -9,6 +9,9 @@ const Add = (strNumber1, strNumber2) => {
     if (sum(strNumber1, strNumber2, "2")){
         return "2"
     }
+    if (sum(strNumber1, strNumber2, "3")){
+        return "3"
+    }
     return "0";
 }
 
