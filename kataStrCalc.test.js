@@ -4,13 +4,16 @@ const sum = (num1, num2, value) => {
 
 const Add = (strNumber1, strNumber2) => {
     if (sum(strNumber1, strNumber2, 1)){
-        return 1
+        return 1;
     }
     if (sum(strNumber1, strNumber2, 2)){
-        return 2
+        return 2;
     }
     if (sum(strNumber1, strNumber2, 3)){
-        return 3
+        return 3;
+    }
+    if (sum(strNumber1, strNumber2, 4)){
+        return 4;
     }
     return 0;
 }
