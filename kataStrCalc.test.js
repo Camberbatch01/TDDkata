@@ -1,8 +1,12 @@
+const sum = (num1, num2, value) => {
+    return num1+num2 === value;
+}
+
 const Add = (strNumber1, strNumber2) => {
-    if (strNumber1+strNumber2 === "1"){
+    if (sum(strNumber1, strNumber2, "1")){
         return "1"
     }
-    if (strNumber1+strNumber2 ==="2"){
+    if (sum(strNumber1, strNumber2, "2")){
         return "2"
     }
     return "";
