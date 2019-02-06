@@ -24,4 +24,6 @@ test("only 1 input given, return the sum", () => {
 })
 test("2 inputs, returns inputs sum", () => {
     expect(Add("1", "2")).toEqual(3)
+    expect(Add("2", "1")).toEqual(3)
+    expect(Add("2", "2")).toEqual(4)
 })
