@@ -1,0 +1,22 @@
+{
+  "name": "tdd",
+  "version": "1.0.0",
+  "description": "",
+  "main": "kataStrCalc.test.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Camberbatch01/TDDkata.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Camberbatch01/TDDkata/issues"
+  },
+  "homepage": "https://github.com/Camberbatch01/TDDkata#readme",
+  "devDependencies": {
+    "jest": "^24.1.0"
+  }
+}
