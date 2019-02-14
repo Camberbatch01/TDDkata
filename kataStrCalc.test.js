@@ -1,32 +1,55 @@
-const sum = (num1, num2, value) => {
-    return Number(num1) + Number(num2) === value;
+const parseDelimiter = str => {
+    let delimiter = /,|\n/;
+    if(str.startsWith('//')) {
+        delimiter = str.substring(2,3)
+        str = str.substring(4)
+    }
+    return [delimiter, str];
 }
 
-const Add = (strNumber1, strNumber2) => {
-    if (sum(strNumber1, strNumber2, 1)){
-        return 1;
+const Add = (str) => {
+    const [delimiter, numberString] = parseDelimiter(str)
+
+    const numbers = numberString.split(delimiter)
+        .map(s => Number(s));
+
+    const negatives = numbers.filter(n => n<0);
+
+    if(negatives.length) {
+        throw new Error('negatives not allowed: ' + negatives);
     }
-    if (sum(strNumber1, strNumber2, 2)){
-        return 2;
-    }
-    if (sum(strNumber1, strNumber2, 3)){
-        return 3;
-    }
-    if (sum(strNumber1, strNumber2, 4)){
-        return 4;
-    }
-    return 0;
+
+    return numbers.reduce((sum, number) => sum + number, 0);
 }
 
-test("when no input, return empty string", () => {
-    expect(Add("", "")).toEqual(0)
+test("When adding empty strings, returns 0", () => {
+    expect(Add("")).toEqual(0)
 })
-test("only 1 input given, return the sum", () => {
-    expect(Add("", "1")).toEqual(1)
-    expect(Add("", "2")).toEqual(2)
+test("Adding a string with 1 number returns that number", () => {
+    expect(Add("1")).toEqual(1)
+    expect(Add("2")).toEqual(2)
 })
-test("2 inputs, returns inputs sum", () => {
-    expect(Add("1", "2")).toEqual(3)
-    expect(Add("2", "1")).toEqual(3)
-    expect(Add("2", "2")).toEqual(4)
+test("adding a string with 2 numbers, returning their sum", () => {
+    expect(Add("1, 2")).toEqual(3)
+    expect(Add("2, 2")).toEqual(4)
+})
+test("adding large amout of numbers, returning their sum", ()=> {
+    expect(Add("1, 2, 3, 4")).toEqual(10)
+})
+test("add method returns sum even with new lines or commas. Not together though", () =>{
+    expect(Add("1\n2,3")).toEqual(6)
+})
+test("delimiter at start, still returns sum", () =>{
+    expect(Add("//;\n1;2;3")).toEqual(6)
+    expect(Add("///\n1/2/3")).toEqual(6)
+})
+test("negatives throw an exception and show the number that was passed", ()=> {
+    try {
+        Add('-1,-3,-6,7,-1')
+        fail()
+    }
+    catch(e)
+    {
+        expect(e.message).toEqual('negatives not allowed: -1,-3,-6,-1')
+    }
 })
